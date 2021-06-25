@@ -15,7 +15,7 @@ public class Calculator {
     private LocalTime endingTime;
     private boolean hadBreak;
 
-    public LocalTime getWorkedHoursFor(LocalDate date, boolean hadBreak) {
+    public LocalTime getWorkedHoursFor() {
         var totalHours = endingTime.minusHours(startingTime.getHour());
         if (hadBreak) {
             totalHours = totalHours.minusMinutes(30);
@@ -27,15 +27,14 @@ public class Calculator {
         return result;
     }
 
-    private  void convertTime() {
-        LocalTime friday = getWorkedHours();
-        LocalTime saturday = getWorkedHours();
-        int totalHours = friday.getHour() + saturday.getHour();
-        int totalMinutes = friday.getMinute() + saturday.getMinute();
+    public int convertTime() {
+        LocalTime workDay = getWorkedHoursFor();
+        int totalHours = workDay.getHour();
+        int totalMinutes = workDay.getMinute();
         var hoursConverted = totalMinutes / 60;
         var extraMinutes = totalMinutes % 60;
-        totalHours = totalHours + hoursConverted;
-
         System.out.println("Total worked hours is " + totalHours + " hours and " + extraMinutes + " minutes");
+        return totalHours = totalHours + hoursConverted;
+
     }
 }
