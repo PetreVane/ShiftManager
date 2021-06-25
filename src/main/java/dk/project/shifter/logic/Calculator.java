@@ -35,6 +35,5 @@ public class Calculator {
         var extraMinutes = totalMinutes % 60;
         System.out.println("Total worked hours is " + totalHours + " hours and " + extraMinutes + " minutes");
         return totalHours = totalHours + hoursConverted;
-
     }
 }

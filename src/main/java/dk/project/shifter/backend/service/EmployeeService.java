@@ -1,10 +1,12 @@
 package dk.project.shifter.backend.service;
 
+import dk.project.shifter.backend.entity.Employee;
 import dk.project.shifter.backend.repository.CompanyRepository;
 import dk.project.shifter.backend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -21,5 +23,8 @@ public class EmployeeService {
         this.companyRepository = companyRepository;
     }
 
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
+    }
 
 }
