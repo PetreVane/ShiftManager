@@ -36,7 +36,6 @@ public class Employee extends AbstractEntity {
     private Company company;
 
     @Enumerated
-    @NotNull
     private Employee.HoursType hoursType;
 
     @OneToMany(mappedBy = "employee", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
