@@ -2,14 +2,8 @@ package dk.project.shifter.backend.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,21 +12,25 @@ import java.time.LocalTime;
 @Entity
 public class Shift extends AbstractEntity {
 
-    @NonNull
-    @NotEmpty
-    private LocalDate date;
+//    @NonNull
+//    @NotEmpty
+    @Column(name = "shift_date")
+    private LocalDate shiftDate;
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
+    @Column(name = "starting_time")
     private LocalTime startingTime;
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
+    @Column(name = "ending_time")
     private LocalTime endingTime;
 
-    @NotNull
-    @NotEmpty
-    private LocalTime pauseDuration;
+//    @NotNull
+//    @NotEmpty
+    @Column(name = "had_break")
+    private boolean hadBreak;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "employee_id")
