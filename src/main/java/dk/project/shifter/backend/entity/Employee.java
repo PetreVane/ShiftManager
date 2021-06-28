@@ -31,22 +31,30 @@ public class Employee extends AbstractEntity {
     @NotEmpty
     private String email = "";
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
+    @OneToMany(mappedBy = "employee", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Company> companies;
 
     @Enumerated
     private Employee.HoursType hoursType;
 
-    @OneToMany(mappedBy = "employee", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Shift> shiftList;
-
-    public void addShift(Shift shift) {
-        if (shiftList == null) {
-            shiftList = new LinkedList<>();
+    public void addCompany(Company company) {
+        if (companies == null) {
+            companies = new LinkedList<>();
         }
-        shiftList.add(shift);
-        shift.setEmployee(this);
+        companies.add(company);
+        company.setEmployee(this);
     }
 
+    public Employee() { }
+
+    public Employee(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    /*
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+ */
 }

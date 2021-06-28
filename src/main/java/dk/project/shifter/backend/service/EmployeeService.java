@@ -1,28 +1,25 @@
 package dk.project.shifter.backend.service;
 
 import dk.project.shifter.backend.entity.Employee;
-import dk.project.shifter.backend.repository.CompanyRepository;
 import dk.project.shifter.backend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class EmployeeService {
 
-    private Logger logger = Logger.getLogger(EmployeeService.class.getName());
-
-    private EmployeeRepository employeeRepository;
-    private CompanyRepository companyRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, CompanyRepository companyRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-        this.companyRepository = companyRepository;
     }
 
+    public void saveEmployee(Employee employee) {
+        employeeRepository.save(employee);
+    }
     public List<Employee> findAll() {
         return employeeRepository.findAll();
     }

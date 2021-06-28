@@ -10,25 +10,21 @@ import java.time.LocalTime;
 @Entity
 public class Shift extends AbstractEntity {
 
-
     @Column(name = "shift_date")
     private LocalDate shiftDate;
-
 
     @Column(name = "starting_time")
     private LocalTime startingTime;
 
-
     @Column(name = "ending_time")
     private LocalTime endingTime;
-
 
     @Column(name = "had_break")
     private boolean hadBreak;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     public Shift() { }
 

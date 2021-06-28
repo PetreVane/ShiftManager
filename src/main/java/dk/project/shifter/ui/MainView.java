@@ -1,10 +1,11 @@
 package dk.project.shifter.ui;
 
-import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import dk.project.shifter.backend.entity.Shift;
+import dk.project.shifter.backend.service.ShiftService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * A example of Vaadin view class.
@@ -21,13 +22,28 @@ import com.vaadin.flow.router.Route;
 @Route("")
 public class MainView extends VerticalLayout {
 
-    public MainView() {
-        var text = new Text("This is an example");
-        var button = new Button("Please click me");
+    private final Grid<Shift> grid = new Grid<>(Shift.class);
+    private ShiftService shiftService;
 
-        HorizontalLayout layout = new HorizontalLayout(text, button);
-        layout.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
-        add(layout);
+    public MainView(@Autowired ShiftService shiftService) {
+        this.shiftService = shiftService;
+        addClassName("list-view"); // mainView css styling
+        setSizeFull(); // applies to the mainView
+        configureGrid();
+        updateGridContent();
+        add(grid);
+    }
+
+    private void configureGrid() {
+        grid.addClassName("contact-grid"); // grid css styling
+        grid.setSizeFull();
+        grid.setColumns("shiftDate", "startingTime", "endingTime", "hadBreak");
+//        grid.removeColumn("employee");
+    }
+
+    private void updateGridContent() {
+        grid.setItems(shiftService.findAll());
     }
 
 }
+
