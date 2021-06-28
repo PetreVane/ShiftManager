@@ -50,13 +50,20 @@ public class ShiftService {
 
     @PostConstruct
     public void addTestData() {
-        Shift sundayShift = new Shift();
-        sundayShift.setShiftDate(LocalDate.now());
-        sundayShift.setStartingTime(LocalTime.of(10, 00));
-        sundayShift.setHadBreak(true);
-        sundayShift.setEndingTime(LocalTime.of(17, 30));
+        System.out.println(" ShiftService postConstruct called ");
+        Shift tuesdayShift = addNewShift(LocalDate.of(2021, 06, 01), LocalTime.of(8, 30), LocalTime.of(16, 45), true);
+        Shift wednesdayShift = addNewShift(LocalDate.of(2021, 06, 02), LocalTime.of(10, 30), LocalTime.of(19, 30), true);
+        Shift thursdayShift = addNewShift(LocalDate.of(2021, 06, 03), LocalTime.of(12, 30), LocalTime.of(19, 30), true);
+        Shift fridayShift = addNewShift(LocalDate.of(2021, 06, 04), LocalTime.of(10, 30), LocalTime.of(15, 30), false);
 
-        shiftRepository.save(sundayShift);
+        List<Shift> shiftList = List.of(tuesdayShift,thursdayShift, wednesdayShift, thursdayShift, fridayShift);
+        for (Shift shift: shiftList) {
+            shiftRepository.save(shift);
+        }
+    }
+
+    private Shift addNewShift(LocalDate date, LocalTime startingTime, LocalTime endingTime, Boolean hadBreak) {
+        return new Shift(date, startingTime, endingTime, hadBreak);
     }
 
 }
