@@ -2,6 +2,7 @@ package dk.project.shifter.ui;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.router.Route;
 import dk.project.shifter.backend.entity.Company;
 import dk.project.shifter.backend.entity.Shift;
@@ -31,8 +32,13 @@ public class MainView extends VerticalLayout {
         addClassName("list-view"); // mainView css styling
         setSizeFull(); // applies to the mainView
         configureGrid();
+
+        SplitLayout splitLayout = new SplitLayout();
+        splitLayout.setSizeFull();
+        ShiftForm shiftForm = new ShiftForm(splitLayout, grid);
+
         updateGridContent();
-        add(grid);
+        add(splitLayout);
     }
 
     private void configureGrid() {
@@ -44,6 +50,7 @@ public class MainView extends VerticalLayout {
             Company company = shift.getCompany();
             return company == null ? "-" : company.getName();
         }).setHeader("Company");
+        grid.getColumns().forEach(column -> column.setAutoWidth(true));
     }
 
     private void updateGridContent() {
