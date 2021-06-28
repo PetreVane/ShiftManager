@@ -10,6 +10,12 @@ import java.time.LocalTime;
 @Entity
 public class Shift extends AbstractEntity {
 
+    public enum HoursType {
+        mandatory,
+        overtime,
+        weekend
+    }
+
     @Column(name = "shift_date")
     private LocalDate shiftDate;
 
@@ -25,6 +31,9 @@ public class Shift extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+
+    @Enumerated
+    private Shift.HoursType hoursType;
 
     public Shift() { }
 
