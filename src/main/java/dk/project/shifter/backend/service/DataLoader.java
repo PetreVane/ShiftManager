@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class DataLoader implements CommandLineRunner {
@@ -36,30 +37,53 @@ public class DataLoader implements CommandLineRunner {
         Employee employee = new Employee("Ioana", "Radu", "ioana.radu@email.com");
 
         System.out.println("Creating a company now ...");
-        Company company = new Company("Zara");
+        Company zara = new Company("Zara");
+        Company sostreneGren = new Company("Søstrene Grene");
 
         // save employee
-        employee.addCompany(company);
+        employee.addCompany(zara);
+        employee.addCompany(sostreneGren);
         employeeService.saveEmployee(employee);
 
         // save company
-        company.setEmployee(employee);
-        companyService.saveCompany(company);
+        zara.setEmployee(employee);
+        companyService.saveCompany(zara);
+
+        // randomize hours type
+        Random random = new Random();
+
 
 
         System.out.println("Creating shifts now ...");
-        Shift tuesdayShift = addNewShift(LocalDate.of(2021, 06, 01), LocalTime.of(8, 30), LocalTime.of(16, 45), true);
-        Shift wednesdayShift = addNewShift(LocalDate.of(2021, 06, 02), LocalTime.of(10, 30), LocalTime.of(19, 30), true);
-        Shift thursdayShift = addNewShift(LocalDate.of(2021, 06, 03), LocalTime.of(12, 30), LocalTime.of(19, 30), true);
-        Shift fridayShift = addNewShift(LocalDate.of(2021, 06, 04), LocalTime.of(10, 30), LocalTime.of(15, 30), false);
+        Shift tuesdayZara = addNewShift(LocalDate.of(2021, 06, 01), LocalTime.of(8, 30), LocalTime.of(16, 45), true);
+        Shift wednesdayZara = addNewShift(LocalDate.of(2021, 06, 02), LocalTime.of(10, 30), LocalTime.of(19, 30), true);
+        Shift thursdayZara = addNewShift(LocalDate.of(2021, 06, 03), LocalTime.of(12, 30), LocalTime.of(19, 30), true);
+        Shift fridayZara = addNewShift(LocalDate.of(2021, 06, 04), LocalTime.of(10, 30), LocalTime.of(15, 30), false);
 
-        List<Shift> shiftList = List.of(tuesdayShift,thursdayShift, wednesdayShift, thursdayShift, fridayShift);
-        for (Shift shift: shiftList) {
-            company.addShift(shift);
-            shift.setCompany(company);
+        Shift tuesdaySostrene = addNewShift(LocalDate.of(2020, 07, 01), LocalTime.of(9, 30), LocalTime.of(16, 45), true);
+        Shift wednesdaySostrene = addNewShift(LocalDate.of(2020, 07, 02), LocalTime.of(15, 30), LocalTime.of(19, 30), true);
+        Shift thursdaySostrene = addNewShift(LocalDate.of(2020, 07, 03), LocalTime.of(13, 45), LocalTime.of(19, 30), true);
+        Shift fridaySostrene = addNewShift(LocalDate.of(2020, 07, 04), LocalTime.of(10, 30), LocalTime.of(15, 30), false);
+
+        List<Shift> zaraShifts = List.of(tuesdayZara, wednesdayZara, thursdayZara, fridayZara);
+        List<Shift> sostreneShift = List.of(tuesdaySostrene, wednesdaySostrene, thursdaySostrene, fridaySostrene);
+        for (Shift shift: zaraShifts) {
+            zara.addShift(shift);
+            shift.setCompany(zara);
+            int randomType =  random.nextInt(Shift.HoursType.values().length);
+            shift.setHoursType(Shift.HoursType.values()[randomType]);
             // save shift
             shiftService.saveShift(shift);
         }
+
+        for (Shift shift : sostreneShift) {
+            sostreneGren.addShift(shift);
+            shift.setCompany(sostreneGren);
+            int randomType =  random.nextInt(Shift.HoursType.values().length);
+            shift.setHoursType(Shift.HoursType.values()[randomType]);
+            shiftService.saveShift(shift);
+        }
+
         System.out.println("Test data should have been added by now ...");
     }
 
