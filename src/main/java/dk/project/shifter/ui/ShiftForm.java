@@ -40,7 +40,6 @@ public class ShiftForm extends FormLayout {
     }
 
 
-
     public <T> ShiftForm(SplitLayout splitLayout, Grid<T> grid) {
         addClassName("contact-form");
         binder.bindInstanceFields(this);
