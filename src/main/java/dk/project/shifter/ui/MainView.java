@@ -1,5 +1,6 @@
 package dk.project.shifter.ui;
 
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * browser tab/window.
  */
 @Route("")
+@CssImport("./styles/shared-styles.css")
 public class MainView extends VerticalLayout {
 
     private final Grid<Shift> grid = new Grid<>(Shift.class);
