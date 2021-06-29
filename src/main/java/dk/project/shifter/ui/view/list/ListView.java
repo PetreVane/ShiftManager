@@ -1,7 +1,6 @@
-package dk.project.shifter.ui;
+package dk.project.shifter.ui.view.list;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -9,19 +8,19 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import dk.project.shifter.backend.entity.Shift;
 import dk.project.shifter.backend.service.ShiftService;
+import dk.project.shifter.ui.MainLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@Route("")
-@CssImport("./styles/shared-styles.css")
-public class MainView extends VerticalLayout {
+@Route(value = "", layout = MainLayout.class)
+public class ListView extends VerticalLayout {
 
     private final Grid<Shift> grid = new Grid<>(Shift.class);
     private final ShiftService shiftService;
     private ShiftForm shiftForm;
 
 
-    public MainView(@Autowired ShiftService shiftService) {
+    public ListView(@Autowired ShiftService shiftService) {
         this.shiftService = shiftService;
         configureUIElements();
     }
