@@ -18,7 +18,7 @@ import com.vaadin.flow.router.Route;
 import dk.project.shifter.backend.entity.Shift;
 
 @Route("contactForm")
-public class ShiftForm {
+public class ShiftForm extends FormLayout {
 
     DatePicker datePicker = new DatePicker("Shift date");
     TimePicker startingTimePicker = new TimePicker("Shift started");
