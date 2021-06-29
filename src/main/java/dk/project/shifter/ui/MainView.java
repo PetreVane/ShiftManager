@@ -28,16 +28,22 @@ public class MainView extends VerticalLayout {
 
     private final Grid<Shift> grid = new Grid<>(Shift.class);
     private final ShiftService shiftService;
+    private ShiftForm shiftForm;
+
 
     public MainView(@Autowired ShiftService shiftService) {
         this.shiftService = shiftService;
+        configureUIElements();
+    }
+
+    private void configureUIElements() {
         addClassName("list-view"); // mainView css styling
         setSizeFull(); // applies to the mainView
         configureGrid();
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
-        ShiftForm shiftForm = new ShiftForm(splitLayout, grid);
+        shiftForm = new ShiftForm(splitLayout, grid);
 
         updateGridContent();
         add(splitLayout);
@@ -53,10 +59,29 @@ public class MainView extends VerticalLayout {
             return company == null ? "-" : company.getName();
         }).setHeader("Company");
         grid.getColumns().forEach(column -> column.setAutoWidth(true));
+
+        // shows selected row
+        grid.asSingleSelect().addValueChangeListener(event -> editShift(event.getValue()));
     }
 
     private void updateGridContent() {
         grid.setItems(shiftService.findAll());
+    }
+
+    private void editShift(Shift shift) {
+        if (shift == null) {
+            closeEditor();
+        } else {
+            shiftForm.setShift(shift);
+            shiftForm.setVisible(true);
+            addClassName("editing");
+        }
+    }
+
+    private void closeEditor() {
+        shiftForm.setShift(null);
+        shiftForm.setVisible(false);
+        shiftForm.removeClassName("editing");
     }
 
 }
