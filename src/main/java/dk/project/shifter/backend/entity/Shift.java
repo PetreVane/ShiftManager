@@ -11,9 +11,9 @@ import java.time.LocalTime;
 public class Shift extends AbstractEntity {
 
     public enum HoursType {
-        mandatory,
+        normal,
         overtime,
-        weekend
+        holiday
     }
 
     @Column(name = "shift_date")
