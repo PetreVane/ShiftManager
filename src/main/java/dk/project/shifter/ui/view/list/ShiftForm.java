@@ -1,4 +1,4 @@
-package dk.project.shifter.ui;
+package dk.project.shifter.ui.view.list;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -122,41 +122,3 @@ public class ShiftForm extends FormLayout {
     }
 }
 
-
-    /*
-    private void createEditorLayout(SplitLayout splitLayout) {
-        Div editorLayoutDiv = new Div();
-        editorLayoutDiv.setClassName("flex flex-col");
-        editorLayoutDiv.setWidth("400px");
-
-        Div editorDiv = new Div();
-        editorDiv.setClassName("p-l flex-grow");
-        editorLayoutDiv.add(editorDiv);
-
-        FormLayout formLayout = new FormLayout();
-        Component[] fields = new Component[]{shiftDate, startingTime, endingTime, hadBreak, configureHoursTypeCombo()};
-
-        for (Component field : fields) {
-            ((HasStyle) field).addClassName("full-width");
-        }
-        formLayout.add(fields);
-        editorDiv.add(formLayout);
-        createButtonLayout(editorLayoutDiv);
-
-        splitLayout.addToSecondary(editorLayoutDiv);
-    }
-
-    private void createGridLayout(SplitLayout splitLayout, Grid grid) {
-        Div wrapper = new Div();
-        wrapper.setId("grid-wrapper");
-        wrapper.setWidthFull();
-        splitLayout.addToPrimary(wrapper);
-        wrapper.add(grid);
-    }
-
-    private void refreshGrid(Grid grid) {
-        grid.select(null);
-        grid.getDataProvider().refreshAll();
-    }
-
-     */

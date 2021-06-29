@@ -12,9 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "employee")
 public class Employee extends AbstractEntity {
-
-
-
+    
     @NotNull
     @NotEmpty
     private String firstName = "";
@@ -45,9 +43,4 @@ public class Employee extends AbstractEntity {
         this.lastName = lastName;
         this.email = email;
     }
-
-    /*
-    @ManyToOne
-    @JoinColumn(name = "company_id")
- */
 }
