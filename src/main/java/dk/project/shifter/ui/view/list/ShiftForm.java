@@ -19,6 +19,9 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
 import dk.project.shifter.backend.entity.Shift;
 
+import java.time.Duration;
+import java.time.LocalTime;
+
 @Route("contactForm")
 public class ShiftForm extends FormLayout {
 
@@ -37,6 +40,15 @@ public class ShiftForm extends FormLayout {
     public ShiftForm() {
         addClassName("contact-form");
         binder.bindInstanceFields(this);
+
+        startingTime.setMinTime(LocalTime.parse("05:00"));
+        startingTime.setMaxTime(LocalTime.parse("22:00"));
+        startingTime.setStep(Duration.ofMinutes(30));
+
+        endingTime.setMinTime(LocalTime.parse("05:00"));
+        endingTime.setMaxTime(LocalTime.parse("22:00"));
+        endingTime.setStep(Duration.ofMinutes(30));
+
         add(shiftDate, startingTime, endingTime, hadBreak, configureHoursTypeCombo(), createButtonLayout());
     }
 
@@ -85,6 +97,8 @@ public class ShiftForm extends FormLayout {
         hoursType.setItems(types);
         return hoursType;
     }
+
+
 
     public static abstract class ShiftFormEvent extends ComponentEvent<ShiftForm> {
         private final Shift shift;
