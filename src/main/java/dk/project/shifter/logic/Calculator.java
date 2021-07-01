@@ -19,20 +19,20 @@ public class Calculator {
         return result;
     }
 
-    public static double countWorkedHours(LocalTime totalHoursForOneDay) {
-        double totalHours = totalHoursForOneDay.getHour();
-        double totalMinutes = totalHoursForOneDay.getMinute();
-        double hoursConverted = totalMinutes / 60;
-        var extraMinutes = totalMinutes % 60;
-        System.out.println("Total worked hours is " + totalHours + " hours and " + extraMinutes + " minutes");
-        return totalHours = totalHours + hoursConverted;
-    }
+//    public static double countWorkedHours(LocalTime totalHoursForOneDay) {
+//        double totalHours = totalHoursForOneDay.getHour();
+//        double totalMinutes = totalHoursForOneDay.getMinute();
+//        double hoursConverted = totalMinutes / 60;
+//        var extraMinutes = totalMinutes % 60;
+//        System.out.println("Total worked hours is " + totalHours + " hours and " + extraMinutes + " minutes");
+//        return totalHours = totalHours + hoursConverted;
+//    }
 
-    public static void countDuration(LocalTime totalHoursForOneDay) {
+    public static Duration countDuration(LocalTime totalHoursForOneDay) {
         Duration totalDuration = Duration.ZERO;
         totalDuration = Duration.ofHours(totalHoursForOneDay.getHour());
         totalDuration = Duration.ofMinutes(totalHoursForOneDay.getMinute());
-
         System.out.println("Duration in hours is " + totalDuration);
+        return  totalDuration;
     }
 }
