@@ -5,6 +5,7 @@ import dk.project.shifter.backend.repository.ShiftRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,14 +44,21 @@ public class ShiftService {
         return shiftRepository.getOne(id);
     }
 
-    public Map<String, Integer> mapShiftsByType(Shift.HoursType type) {
+    public Map<String, Integer> mapShiftsByType() {
         Map<String, Integer> mapped = new HashMap<>();
         List<Shift> shiftList = findAll();
-        var counter = ((int) shiftList.stream().filter(shift -> {
-            return shift.getHoursType().name().equals(type.name());
-        }).count());
-        mapped.put(type.name(), counter);
+        var types = Shift.HoursType.values();
+        for (Shift.HoursType type : types) {
+            var counter = ((int) shiftList.stream().filter(shift -> {
+                return shift.getHoursType().name().equals(type.name());
+            }).count());
+            mapped.put(type.name(), counter);
+        }
         return mapped;
+    }
+
+    public List<Shift> getShiftsByDate(LocalDate startDate, LocalDate endDate) {
+        return shiftRepository.searchShift(startDate, endDate);
     }
 
 }
