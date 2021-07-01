@@ -8,7 +8,6 @@ import com.vaadin.flow.component.charts.model.DataSeries;
 import com.vaadin.flow.component.charts.model.DataSeriesItem;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import dk.project.shifter.backend.service.ShiftService;
@@ -25,12 +24,12 @@ public class DashboardView extends VerticalLayout {
         public DashboardView (@Autowired ShiftService shiftService) {
                 this.shiftService = shiftService;
                 addClassName("dashboard-view");
-                setDefaultHorizontalComponentAlignment(Alignment.CENTER);
                 add(getShiftStats(), getShiftsByType());
+                add(new SummaryView(shiftService));
         }
 
         private Component getShiftStats() {
-                Span stats = new Span(shiftService.countShifts() + " shifts");
+                Span stats = new Span(" You have in total " + shiftService.countShifts() + " entries in your database");
                 addClassName("shift-stats");
                 return stats;
         }
@@ -43,14 +42,6 @@ public class DashboardView extends VerticalLayout {
                         dataSeries.add(new DataSeriesItem(shiftType, counter)));
                 chart.getConfiguration().setSeries(dataSeries);
                 return chart;
-        }
-
-        private SplitLayout addSummary(ShiftService shiftService) {
-                SplitLayout splitLayout = new SplitLayout();
-                splitLayout.setOrientation(SplitLayout.Orientation.VERTICAL);
-                splitLayout.addToPrimary(getShiftStats(), getShiftsByType());
-                splitLayout.addToSecondary(new SummaryView(shiftService));
-                return splitLayout;
         }
 
 }

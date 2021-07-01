@@ -29,7 +29,7 @@ public class SummaryView extends VerticalLayout {
     private DatePicker startDatePicker = new DatePicker();
     private DatePicker endDatePicker = new DatePicker("Select end date");
     private Text text = new Text("You have worked: ");
-    private TextField textField = new TextField("Hours worked");
+    private TextField textField = new TextField("Hours worked for interval");
     private Button saveButton = new Button("Fetch records");
     private List<Shift> shifts = new ArrayList<>();
 
