@@ -43,4 +43,12 @@ public class Shift extends AbstractEntity {
         this.endingTime = endingTime;
         this.hadBreak = hadBreak;
     }
+
+    public boolean hadBreak() {
+        return hadBreak;
+    }
+
+    public void setBreak(boolean hadBreak) {
+        this.hadBreak = hadBreak;
+    }
 }
