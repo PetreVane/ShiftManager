@@ -6,7 +6,6 @@ import dk.project.shifter.logic.Calculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -66,15 +65,20 @@ public class ShiftService {
         var types = Shift.HoursType.values();
         Duration totalDuration = Duration.ZERO;
         for (Shift.HoursType type : types) {
-            var counter = shiftList.stream().filter(shift -> {
-                if (shift.getHoursType().name().equals(type.name())) {
-                    var hours = Calculator.getWorkedHoursFor(shift);
-                    var shiftDuration = Calculator.countDuration(hours);
-                    totalDuration.plus(shiftDuration);
-                }
-            });
+            totalDuration = totalDuration.plus(getShiftDuration(type, shiftList));
             mapped.put(type.name(), totalDuration);
         }
+        return mapped;
+    }
+
+    private Duration getShiftDuration(Shift.HoursType type, List<Shift> shiftList) {
+        Duration shiftDuration = Duration.ZERO;
+        for (Shift shift : shiftList) {
+            if (shift.getHoursType().name().equals(type.name())) {
+                shiftDuration = shiftDuration.plus(Calculator.getWorkedHoursFor(shift));
+            }
+        }
+        return shiftDuration;
     }
 
     public List<Shift> getShiftsByDate(LocalDate startDate, LocalDate endDate) {

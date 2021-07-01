@@ -56,9 +56,7 @@ public class SummaryView extends VerticalLayout {
         var shifts = shiftService.getShiftsByDate(startDate, endDate);
 
         for (Shift shift : shifts) {
-            var hoursForShift = Calculator.getWorkedHoursFor(shift);
-            totalDuration = totalDuration.plusHours(hoursForShift.getHour());
-            totalDuration = totalDuration.plusMinutes(hoursForShift.getMinute());
+            totalDuration = totalDuration.plus(Calculator.getWorkedHoursFor(shift));
         }
         var result = totalDuration.toString().replace("P", "").replace("T", "").replace("H", " hours ").replace("M", " minutes ");
         totalTextField.setPlaceholder(result);
