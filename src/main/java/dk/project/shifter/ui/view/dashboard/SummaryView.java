@@ -29,7 +29,7 @@ public class SummaryView extends VerticalLayout {
     private DatePicker startDatePicker = new DatePicker();
     private DatePicker endDatePicker = new DatePicker("Select end date");
     private Text text = new Text("You have worked: ");
-    private TextField textField = new TextField("Hours worked for interval");
+    private TextField totalTextField = new TextField("Total hours for interval");
     private Button saveButton = new Button("Fetch records");
     private List<Shift> shifts = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class SummaryView extends VerticalLayout {
         addClassName("hello-world-view");
         configureAction();
         formLayout.add(configureDatePicker(), endDatePicker );
-        add(formLayout, textField, saveButton);
+        add(formLayout, totalTextField, saveButton);
     }
 
     private DatePicker configureDatePicker() {
@@ -61,7 +61,12 @@ public class SummaryView extends VerticalLayout {
             totalDuration = totalDuration.plusMinutes(hoursForShift.getMinute());
         }
         var result = totalDuration.toString().replace("P", "").replace("T", "").replace("H", " hours ").replace("M", " minutes ");
-        textField.setPlaceholder(result);
+        totalTextField.setPlaceholder(result);
+    }
+
+    private void getShiftsByType(LocalDate startDate, LocalDate endDate) {
+        var shifts = shiftService.getShiftsByDate(startDate, endDate);
+
     }
 
 }
