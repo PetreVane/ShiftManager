@@ -30,8 +30,6 @@ public class DataLoader implements CommandLineRunner {
         addTestData();
     }
 
-
-
     public void addTestData() {
         System.out.println("Creating an user now ...");
         Employee employee = new Employee("Ioana", "Radu", "ioana.radu@email.com");
@@ -52,8 +50,6 @@ public class DataLoader implements CommandLineRunner {
         // randomize hours type
         Random random = new Random();
 
-
-
         System.out.println("Creating shifts now ...");
         Shift tuesdayZara = addNewShift(LocalDate.of(2021, 06, 01), LocalTime.of(8, 30), LocalTime.of(16, 45), true);
         Shift wednesdayZara = addNewShift(LocalDate.of(2021, 06, 02), LocalTime.of(10, 30), LocalTime.of(19, 30), true);
@@ -66,30 +62,30 @@ public class DataLoader implements CommandLineRunner {
         Shift fridaySostrene = addNewShift(LocalDate.of(2020, 07, 04), LocalTime.of(10, 30), LocalTime.of(15, 30), false);
 
         List<Shift> zaraShifts = List.of(tuesdayZara, wednesdayZara, thursdayZara, fridayZara);
-        List<Shift> sostreneShift = List.of(tuesdaySostrene, wednesdaySostrene, thursdaySostrene, fridaySostrene);
-        for (Shift shift: zaraShifts) {
+        List<Shift> sostreneShifts = List.of(tuesdaySostrene, wednesdaySostrene, thursdaySostrene, fridaySostrene);
+
+        zaraShifts.stream().forEach(shift -> {
             zara.addShift(shift);
             shift.setCompany(zara);
-            int randomType =  random.nextInt(Shift.HoursType.values().length);
+            int randomType = random.nextInt(Shift.HoursType.values().length);
             shift.setHoursType(Shift.HoursType.values()[randomType]);
-            // save shift
             shiftService.saveShift(shift);
-        }
+        });
 
-        for (Shift shift : sostreneShift) {
+        sostreneShifts.stream().forEach(shift -> {
             sostreneGren.addShift(shift);
             shift.setCompany(sostreneGren);
-            int randomType =  random.nextInt(Shift.HoursType.values().length);
+            int randomType = random.nextInt(Shift.HoursType.values().length);
             shift.setHoursType(Shift.HoursType.values()[randomType]);
             shiftService.saveShift(shift);
-        }
+        });
 
-        System.out.println("Test data should have been added by now ...");
     }
 
     private Shift addNewShift(LocalDate date, LocalTime startingTime, LocalTime endingTime, Boolean hadBreak) {
         return new Shift(date, startingTime, endingTime, hadBreak);
     }
+
 }
 
 
