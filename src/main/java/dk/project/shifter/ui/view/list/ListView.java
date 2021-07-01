@@ -5,6 +5,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import dk.project.shifter.backend.entity.Shift;
 import dk.project.shifter.backend.service.ShiftService;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Route(value = "", layout = MainLayout.class)
+@PageTitle("Listing of your shifts")
 public class ListView extends VerticalLayout {
 
     private final Grid<Shift> grid = new Grid<>(Shift.class);
