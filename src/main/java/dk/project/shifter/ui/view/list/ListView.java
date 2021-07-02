@@ -33,10 +33,10 @@ public class ListView extends VerticalLayout {
         configureGrid();
 
         shiftForm = new ShiftForm();
+        shiftForm.setVisible(false);
         Div content = new Div(grid, shiftForm);
         content.addClassName("content");
         content.setSizeFull();
-
 
         shiftForm.addListener(ShiftForm.SaveEvent.class, this::saveShift);
         shiftForm.addListener(ShiftForm.DeleteEvent.class, this::deleteShift);
@@ -77,17 +77,17 @@ public class ListView extends VerticalLayout {
     }
 
     public void addShift() {
+        grid.asSingleSelect().clear();
         Shift shift = new Shift();
         editShift(shift);
-        grid.asSingleSelect().clear();
     }
 
     private void editShift(Shift shift) {
         if (shift == null) {
             clearEditor();
         } else {
-            shiftForm.setShift(shift);
             shiftForm.setVisible(true);
+            shiftForm.setShift(shift);
             addClassName("editing");
         }
     }
@@ -101,13 +101,12 @@ public class ListView extends VerticalLayout {
     private void deleteShift(ShiftForm.ShiftFormEvent event) {
         Shift shiftToBeDeleted = event.getShift();
         if (shiftToBeDeleted == null) {
-            System.out.println("Shift is null");
+            shiftForm.setVisible(false);
         } else  {
             shiftService.deleteShift(shiftToBeDeleted);
             updateGridContent();
             clearEditor();
         }
     }
-
 }
 
