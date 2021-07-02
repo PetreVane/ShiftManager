@@ -75,19 +75,16 @@ public class SummaryView extends VerticalLayout {
 
     private void getDurationByShiftTypeForInterval(LocalDate startDate, LocalDate endDate) {
         durationByType = shiftService.mapShiftsForTimeInterval(startDate, endDate);
-        System.out.println("Summary duration by type: " + durationByType);
     }
 
     private Select configureSelect() throws CustomException {
         select.setLabel("Shift type");
         select.setPlaceholder("Click to select");
-        select.setItems("Normal", "Overtime", "Holiday");
+        select.setItems(" ", "Normal", "Overtime", "Holiday");
         select.addValueChangeListener(event -> {
-            System.out.println("Event Value " + event.getValue());
             var shiftType = event.getValue().toString().toLowerCase();
             try {
                 var shiftDuration = getDurationFor(shiftType);
-                System.out.println("Shift duration " + shiftDuration);
                 setTextField(shiftDuration);
             }
             catch (Exception e) {
@@ -98,7 +95,8 @@ public class SummaryView extends VerticalLayout {
     }
 
     private void setTextField(String value) {
-        textField.setPlaceholder(value);
+        var formatedValue = value.replace("P", "").replace("T", "").replace("H", " hours ").replace("M", " minutes ");
+        textField.setPlaceholder(formatedValue);
     }
 
     private String getDurationFor(String type) {
