@@ -18,6 +18,7 @@ import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
 import dk.project.shifter.backend.entity.Shift;
+import dk.project.shifter.exceptions.CustomException;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -83,12 +84,12 @@ public class ShiftForm extends FormLayout {
         return buttonLayout;
     }
 
-    private void validateAndSave() {
+    private void validateAndSave() throws CustomException {
         try {
             binder.writeBean(shift);
             fireEvent(new SaveEvent(this, shift));
         } catch (ValidationException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
