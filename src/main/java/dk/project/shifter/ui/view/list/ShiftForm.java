@@ -15,7 +15,6 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
 import dk.project.shifter.backend.entity.Shift;
 import dk.project.shifter.exceptions.CustomException;
@@ -23,7 +22,7 @@ import dk.project.shifter.exceptions.CustomException;
 import java.time.Duration;
 import java.time.LocalTime;
 
-@Route("contactForm")
+
 public class ShiftForm extends FormLayout {
 
     DatePicker shiftDate = new DatePicker("Shift date");
