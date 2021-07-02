@@ -16,6 +16,7 @@ import java.util.Map;
 public class ShiftService {
 
     private final ShiftRepository shiftRepository;
+    private Map<String, Duration> mappedShifts = new HashMap<>();
 
     @Autowired
     public ShiftService(ShiftRepository shiftRepository) {
@@ -59,30 +60,35 @@ public class ShiftService {
         return mapped;
     }
 
-    public Map<String, Duration> filterShiftsByTypeForInterval(LocalDate startDate, LocalDate endDate) {
-        Map<String, Duration> mapped = new HashMap<>();
-        List<Shift> shiftList = getShiftsByDate(startDate,endDate);
-        var types = Shift.HoursType.values();
-        Duration totalDuration = Duration.ZERO;
-        for (Shift.HoursType type : types) {
-            totalDuration = totalDuration.plus(getShiftDuration(type, shiftList));
-            mapped.put(type.name(), totalDuration);
-        }
-        return mapped;
-    }
-
-    private Duration getShiftDuration(Shift.HoursType type, List<Shift> shiftList) {
-        Duration shiftDuration = Duration.ZERO;
+    // Gets a list of shits for time interval, calculates duration for each shift and maps total duration for shift type
+    // Ex.: Total overtime hours from 1 june to 1 july = 20 hours
+    public Map<String, Duration> mapShiftsForTimeInterval(LocalDate startDate, LocalDate endDate) {
+        List<Shift> shiftList = getShiftsForTimeInterval(startDate, endDate);
         for (Shift shift : shiftList) {
-            if (shift.getHoursType().name().equals(type.name())) {
-                shiftDuration = shiftDuration.plus(Calculator.getWorkedHoursFor(shift));
-            }
+            mapShiftTypeByDuration(shift, getShiftDuration(shift));
         }
-        return shiftDuration;
+        return mappedShifts;
     }
 
-    public List<Shift> getShiftsByDate(LocalDate startDate, LocalDate endDate) {
+    private Duration getShiftDuration(Shift shift) {
+        return Calculator.getWorkedHoursFor(shift);
+    }
+
+    // Gets a list of shifts for time interval
+    public List<Shift> getShiftsForTimeInterval(LocalDate startDate, LocalDate endDate) {
         return shiftRepository.searchShift(startDate, endDate);
+    }
+
+    private void mapShiftTypeByDuration(Shift shift, Duration shiftDuration) {
+        var shiftType = shift.getHoursType().name();
+        var existingRecord = mappedShifts.get(shiftType);
+        if (existingRecord == null) {
+            mappedShifts.put(shiftType, shiftDuration);
+        } else {
+            var mappedDuration = mappedShifts.get(shiftType);
+            mappedDuration = mappedDuration.plus(shiftDuration);
+            mappedShifts.put(shiftType, mappedDuration);
+        }
     }
 
 }
