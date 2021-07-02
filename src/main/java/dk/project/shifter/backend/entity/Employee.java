@@ -2,11 +2,10 @@ package dk.project.shifter.backend.entity;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.LinkedList;
-import java.util.List;
 
 @Data
 @Entity
@@ -25,16 +24,16 @@ public class Employee extends AbstractEntity {
     @NotEmpty
     private String email = "";
 
-    @OneToMany(mappedBy = "employee", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Company> companies;
+//    @OneToMany(mappedBy = "employee", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Company> companies;
 
-    public void addCompany(Company company) {
-        if (companies == null) {
-            companies = new LinkedList<>();
-        }
-        companies.add(company);
-        company.setEmployee(this);
-    }
+//    public void addCompany(Company company) {
+//        if (companies == null) {
+//            companies = new LinkedList<>();
+//        }
+//        companies.add(company);
+//        company.setEmployee(this);
+//    }
 
     public Employee() { }
 

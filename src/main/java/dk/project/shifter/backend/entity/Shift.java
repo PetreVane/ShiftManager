@@ -28,9 +28,9 @@ public class Shift extends AbstractEntity {
     @Column(name = "had_break")
     private boolean hadBreak;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
+//    @ManyToOne
+//    @JoinColumn(name = "company_id")
+//    private Company company;
 
     @Enumerated
     private Shift.HoursType hoursType;

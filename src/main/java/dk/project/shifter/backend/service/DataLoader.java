@@ -39,8 +39,8 @@ public class DataLoader implements CommandLineRunner {
         Company sostreneGren = new Company("Søstrene Grene");
 
         // save employee
-        employee.addCompany(zara);
-        employee.addCompany(sostreneGren);
+//        employee.addCompany(zara);
+//        employee.addCompany(sostreneGren);
         employeeService.saveEmployee(employee);
 
         // save company
@@ -65,16 +65,16 @@ public class DataLoader implements CommandLineRunner {
         List<Shift> sostreneShifts = List.of(tuesdaySostrene, wednesdaySostrene, thursdaySostrene, fridaySostrene);
 
         zaraShifts.stream().forEach(shift -> {
-            zara.addShift(shift);
-            shift.setCompany(zara);
+//            zara.addShift(shift);
+//            shift.setCompany(zara);
             int randomType = random.nextInt(Shift.HoursType.values().length);
             shift.setHoursType(Shift.HoursType.values()[randomType]);
             shiftService.saveShift(shift);
         });
 
         sostreneShifts.stream().forEach(shift -> {
-            sostreneGren.addShift(shift);
-            shift.setCompany(sostreneGren);
+//            sostreneGren.addShift(shift);
+//            shift.setCompany(sostreneGren);
             int randomType = random.nextInt(Shift.HoursType.values().length);
             shift.setHoursType(Shift.HoursType.values()[randomType]);
             shiftService.saveShift(shift);

@@ -58,7 +58,7 @@ public class ListView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassName("contact-grid"); // grid css styling
         grid.setSizeFull();
-        grid.removeColumnByKey("company");
+//        grid.removeColumnByKey("company");
         grid.setColumns("shiftDate", "startingTime", "endingTime", "hadBreak", "hoursType");
         grid.getColumns().forEach(column -> column.setAutoWidth(true));
 
