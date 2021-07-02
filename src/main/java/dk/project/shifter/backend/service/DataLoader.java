@@ -56,10 +56,10 @@ public class DataLoader implements CommandLineRunner {
         Shift thursdayZara = addNewShift(LocalDate.of(2021, 06, 03), LocalTime.of(12, 30), LocalTime.of(19, 30), true);
         Shift fridayZara = addNewShift(LocalDate.of(2021, 06, 04), LocalTime.of(10, 30), LocalTime.of(15, 30), false);
 
-        Shift tuesdaySostrene = addNewShift(LocalDate.of(2020, 07, 01), LocalTime.of(9, 30), LocalTime.of(16, 45), true);
-        Shift wednesdaySostrene = addNewShift(LocalDate.of(2020, 07, 02), LocalTime.of(15, 30), LocalTime.of(19, 30), true);
-        Shift thursdaySostrene = addNewShift(LocalDate.of(2020, 07, 03), LocalTime.of(13, 45), LocalTime.of(19, 30), true);
-        Shift fridaySostrene = addNewShift(LocalDate.of(2020, 07, 04), LocalTime.of(10, 30), LocalTime.of(15, 30), false);
+        Shift tuesdaySostrene = addNewShift(LocalDate.of(2021, 06, 11), LocalTime.of(9, 30), LocalTime.of(16, 45), true);
+        Shift wednesdaySostrene = addNewShift(LocalDate.of(2021, 06, 12), LocalTime.of(15, 30), LocalTime.of(19, 30), true);
+        Shift thursdaySostrene = addNewShift(LocalDate.of(2021, 06, 23), LocalTime.of(13, 45), LocalTime.of(19, 30), true);
+        Shift fridaySostrene = addNewShift(LocalDate.of(2021, 06, 24), LocalTime.of(10, 30), LocalTime.of(15, 30), false);
 
         List<Shift> zaraShifts = List.of(tuesdayZara, wednesdayZara, thursdayZara, fridayZara);
         List<Shift> sostreneShifts = List.of(tuesdaySostrene, wednesdaySostrene, thursdaySostrene, fridaySostrene);

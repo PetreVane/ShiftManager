@@ -14,7 +14,6 @@ public class Calculator {
         var totalMinutes = Math.abs(totalHours.getMinute() - shift.getStartingTime().getMinute());
         totalHours = totalHours.minusMinutes(totalMinutes);
         LocalTime result = LocalTime.of(totalHours.getHour(), totalMinutes);
-        System.out.println("Total hours worked: " + result);
         return countDuration(result);
     }
 
@@ -23,7 +22,6 @@ public class Calculator {
         Duration totalDuration = Duration.ZERO;
         totalDuration = totalDuration.plusHours(totalHoursForOneDay.getHour());
         totalDuration = totalDuration.plusMinutes(totalHoursForOneDay.getMinute());
-        System.out.println("Duration in hours is " + totalDuration);
         return  totalDuration;
     }
 }
