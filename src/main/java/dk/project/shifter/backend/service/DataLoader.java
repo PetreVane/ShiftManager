@@ -1,6 +1,5 @@
 package dk.project.shifter.backend.service;
 
-import dk.project.shifter.backend.entity.Company;
 import dk.project.shifter.backend.entity.Employee;
 import dk.project.shifter.backend.entity.Shift;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class DataLoader implements CommandLineRunner {
     private ShiftService shiftService;
 
     @Autowired
-    private CompanyService companyService;
-
-    @Autowired
     private EmployeeService employeeService;
 
     @Override
@@ -34,18 +30,8 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Creating an user now ...");
         Employee employee = new Employee("Ioana", "Radu", "ioana.radu@email.com");
 
-        System.out.println("Creating a company now ...");
-        Company zara = new Company("Zara");
-        Company sostreneGren = new Company("Søstrene Grene");
-
         // save employee
-//        employee.addCompany(zara);
-//        employee.addCompany(sostreneGren);
         employeeService.saveEmployee(employee);
-
-        // save company
-        zara.setEmployee(employee);
-        companyService.saveCompany(zara);
 
         // randomize hours type
         Random random = new Random();
@@ -65,16 +51,12 @@ public class DataLoader implements CommandLineRunner {
         List<Shift> sostreneShifts = List.of(tuesdaySostrene, wednesdaySostrene, thursdaySostrene, fridaySostrene);
 
         zaraShifts.stream().forEach(shift -> {
-//            zara.addShift(shift);
-//            shift.setCompany(zara);
             int randomType = random.nextInt(Shift.HoursType.values().length);
             shift.setHoursType(Shift.HoursType.values()[randomType]);
             shiftService.saveShift(shift);
         });
 
         sostreneShifts.stream().forEach(shift -> {
-//            sostreneGren.addShift(shift);
-//            shift.setCompany(sostreneGren);
             int randomType = random.nextInt(Shift.HoursType.values().length);
             shift.setHoursType(Shift.HoursType.values()[randomType]);
             shiftService.saveShift(shift);
