@@ -1,4 +1,4 @@
-package com.vaadin.tutorial.crm;
+package dk.project.shifter.it;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.notification.testbench.NotificationElement;
@@ -9,7 +9,11 @@ import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-public class ListViewIT extends com.vaadin.tutorial.crm.AbstractViewTest {
+public class ListViewIT extends AbstractViewTest {
+
+    protected ListViewIT(String route) {
+        super(route);
+    }
 
     @Test
     public void clickingButtonShowsNotification() {
@@ -32,6 +36,8 @@ public class ListViewIT extends com.vaadin.tutorial.crm.AbstractViewTest {
         WebElement element = $(ButtonElement.class).first();
         assertThemePresentOnElement(element, Lumo.class);
     }
+
+    private void assertThemePresentOnElement(WebElement element, Class<Lumo> lumoClass) { }
 
     @Test
     public void testClickButtonShowsHelloAnonymousUserNotificationWhenUserNameIsEmpty() {

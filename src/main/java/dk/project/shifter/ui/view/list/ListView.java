@@ -19,7 +19,7 @@ public class ListView extends VerticalLayout {
 
     private final Grid<Shift> grid = new Grid<>(Shift.class);
     private final ShiftService shiftService;
-    private ShiftForm shiftForm;
+    public ShiftForm shiftForm;
 
 
     public ListView(@Autowired ShiftService shiftService) {
