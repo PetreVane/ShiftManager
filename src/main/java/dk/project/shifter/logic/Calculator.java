@@ -1,11 +1,16 @@
 package dk.project.shifter.logic;
 
 import dk.project.shifter.backend.entity.Shift;
+import dk.project.shifter.exceptions.CustomException;
 
 import java.time.Duration;
 import java.time.LocalTime;
 
 public class Calculator {
+
+    private Calculator() {
+        throw new CustomException("Utility class");
+    }
 
     public static Duration getWorkedHoursFor(Shift shift) {
         var totalHours = shift.getEndingTime().minusHours(shift.getStartingTime().getHour());
