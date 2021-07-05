@@ -1,4 +1,5 @@
-## ShiftManager
+## ShiftManager    
+
 - ShiftManager helps you keep track of your worked hours.
 - It has a beautiful chart which provides an overview of your worked hours, organised by type.
 
@@ -18,7 +19,10 @@
 - Vaadin
 
 
-### Screenshots
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=PetreVane_ShiftManager)
+
+
 
 ![img_3.png](screenshots/img_3.png)
 
