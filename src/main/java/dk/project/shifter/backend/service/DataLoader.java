@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -25,14 +27,14 @@ public class DataLoader implements CommandLineRunner {
         addTestData();
     }
 
-    public void addTestData() {
+    public void addTestData() throws NoSuchAlgorithmException {
         Employee employee = new Employee("Ioana", "Radu", "ioana.radu@email.com");
 
         // save employee
         employeeService.saveEmployee(employee);
 
         // randomize hours type
-        Random random = new Random();
+        Random random = SecureRandom.getInstanceStrong();
 
         Shift tuesdayZara = addNewShift(LocalDate.of(2021, 06, 01), LocalTime.of(8, 30), LocalTime.of(16, 45), true);
         Shift wednesdayZara = addNewShift(LocalDate.of(2021, 06, 02), LocalTime.of(10, 30), LocalTime.of(19, 30), true);
