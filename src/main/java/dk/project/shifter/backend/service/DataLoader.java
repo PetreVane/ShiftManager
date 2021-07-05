@@ -22,12 +22,10 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Adding Test data now ...");
         addTestData();
     }
 
     public void addTestData() {
-        System.out.println("Creating an user now ...");
         Employee employee = new Employee("Ioana", "Radu", "ioana.radu@email.com");
 
         // save employee
@@ -36,7 +34,6 @@ public class DataLoader implements CommandLineRunner {
         // randomize hours type
         Random random = new Random();
 
-        System.out.println("Creating shifts now ...");
         Shift tuesdayZara = addNewShift(LocalDate.of(2021, 06, 01), LocalTime.of(8, 30), LocalTime.of(16, 45), true);
         Shift wednesdayZara = addNewShift(LocalDate.of(2021, 06, 02), LocalTime.of(10, 30), LocalTime.of(19, 30), true);
         Shift thursdayZara = addNewShift(LocalDate.of(2021, 06, 03), LocalTime.of(12, 30), LocalTime.of(19, 30), true);
