@@ -55,9 +55,7 @@ public class ShiftService {
         List<Shift> shiftList = findAll();
         var types = Shift.HoursType.values();
         for (Shift.HoursType type : types) {
-            var counter = ((int) shiftList.stream().filter(shift -> {
-                return shift.getHoursType().name().equals(type.name());
-            }).count());
+            var counter = ((int) shiftList.stream().filter(shift -> shift.getHoursType().name().equals(type.name())).count());
             mapped.put(type.name(), counter);
         }
         return mapped;
