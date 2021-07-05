@@ -1,6 +1,5 @@
 package dk.project.shifter.ui.view.dashboard;
 
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -31,7 +30,6 @@ public class SummaryView extends VerticalLayout {
     HorizontalLayout formLayout = new HorizontalLayout();
     private DatePicker startDatePicker = new DatePicker();
     private DatePicker endDatePicker = new DatePicker("Select end date");
-    private Text text = new Text("You have worked: ");
     private TextField textField = new TextField("Total hours for interval");
     private Select select = new Select();
     private Button saveButton = new Button("Fetch records");
